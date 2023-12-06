@@ -59,7 +59,11 @@
 docker build -t aliyunddns .
 
 ## 运行 Docker 容器
-docker run -d --name aliyunddns_container -v /path/to/your/config:/config aliyunddns
+docker run -d \
+  --name aliyunddns \
+  -v /path/to/your/local/config.json:/app/config.json \
+  -e CONFIG_FILE_PATH=/app/config.json \
+  myth815/aliyun_ddns_for_routeros:latest
 
 ## 许可
 此项目在 MIT 许可下发布。
