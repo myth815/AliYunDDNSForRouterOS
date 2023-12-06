@@ -1,0 +1,29 @@
+{
+    "update_interval": 300,
+    "RouterOS": {
+        "API_URL": "http://routeros_api_url",
+        "User_Name": "username",
+        "Password": "password"
+    },
+    "AliYun": {
+        "Access_Key_ID": "access_key_id",
+        "Access_Key_Secret": "access_key_secret",
+        "region_id": "cn-hangzhou"
+    },
+    "Domains": [
+        {
+            "Domain_Name": "example.com",
+            "Sub_Domain_Name": "subdomain",
+            "Record": [
+                {
+                    "Type": "A",
+                    "Line": "default",
+                    "RouterOS_Interface": "interface_name",
+                    "TTL": 600
+                },
+                // 更多记录...
+            ]
+        }
+        // 更多域名...
+    ]
+}
