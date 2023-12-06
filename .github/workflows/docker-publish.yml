@@ -28,4 +28,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: myth815/AliYunDDNSForRouterOS:latest
+        tags: myth815/aliyun_ddns_for_routeros:latest
