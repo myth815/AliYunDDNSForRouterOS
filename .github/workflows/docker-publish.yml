@@ -3,8 +3,8 @@ name: Build and Publish Docker
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    tags:
+      - 'v*'
 
 jobs:
   build-and-push:
@@ -28,4 +28,22 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: myth815/aliyun_ddns_for_routeros:latest
+        tags: |
+          myth815/aliyun_ddns_for_routeros:latest
+          myth815/aliyun_ddns_for_routeros:${{ github.sha }}
+
+    - name: Update Docker Hub Description
+      if: github.ref == 'refs/heads/main'
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        DOCKERHUB_REPOSITORY: myth815/aliyun_ddns_for_routeros
+        README_FILEPATH: './README.md'
+      run: |
+        README_CONTENT=$(cat $README_FILEPATH)
+        echo "$README_CONTENT" | \
+        curl -X PATCH \
+             -H "Content-Type: application/json" \
+             --data '{"full_description": "'"$(echo "$README_CONTENT" | jq -aRs .)"'"}' \
+             -u $DOCKERHUB_USERNAME:$DOCKERHUB_PASSWORD \
+             "https://hub.docker.com/v2/repositories/$DOCKERHUB_REPOSITORY/"
