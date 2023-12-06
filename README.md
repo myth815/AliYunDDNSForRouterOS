@@ -1,0 +1,2 @@
+# AliYunDDNSForRouterOS
+一个自动更新阿里云DNS记录的Python脚本，实现了Docker部署，用于RouterOS环境下的动态域名解析，支持IPv4和IPv6，兼容多线路解析。
