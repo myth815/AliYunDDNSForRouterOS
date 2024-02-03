@@ -72,7 +72,7 @@ def get_routeros_interface_address(routerOS_config, record_type, routerOS_Interf
         exit(1)
 
     try:
-        response = requests.get(request_url, auth=routerOS_auth, timeout=10)
+        response = requests.get(request_url, auth=routerOS_auth, timeout=10, verify=False)
         if response.status_code == 200:
             # 解析响应数据
             addresses = response.json()
